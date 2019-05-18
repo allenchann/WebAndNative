@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    function nativeCall() {
+        document.getElementById('showNative').innerHTML = "原生调用";
+        alert("原生调用js");
+    }
+
+    function callNativeByHref() {
+        window.location.href = ("test://callNative");
+    }
+
+    function callNativeByIFrame() {
+        var execIframe = document.createElement('iframe');
+        execIframe.style.display = 'none';
+        execIframe.src = 'test://callNative';
+        document.body.appendChild(execIframe);
+    }
+
+    function callNativeByJSCore() {
+        document.getElementById('showNativeCall').innerHTML = "调用原生";
+        app.CallNative();
+    }
+
+    function wkCallNative() {
+        window.webkit.messageHandlers.callNative.postMessage("1");
+    }
+
+</script>
+
+</head>
+
+<body>hello world
+
+<button onclick="callNativeByHref()">uiweiview调用原生(href)</button>
+<button onclick="callNativeByIFrame()">uiweiview调用原生(iframe)</button>
+<button onclick="callNativeByJSCore()">uiweiview调用原生(jscore)</button>
+<button onclick="wkCallNative()">wkweiview调用原生</button>
+<div id='showNative'></div>
+<div id='showNativeCall'></div>
+</body>
+</html>
